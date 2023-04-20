@@ -1,0 +1,24 @@
+-- Active: 1681969484355@@127.0.0.1@3306
+CREATE Table _Section(
+    id_section INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name_section VARCHAR(20),
+    price INT,
+    surname VARCHAR(20)
+); 
+CREATE Table _Payment(
+    id_payment INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    date DATE,
+    id_section_payment INT,
+    id_member_payment INT,
+    Foreign Key (id_section_payment) REFERENCES _Section (id_section),
+    Foreign Key (id_member_payment) REFERENCES _Members (id_members)
+); 
+CREATE Table _Members(
+    id_members INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    FIO VARCHAR(60),
+    address VARCHAR(50),
+    education_institution VARCHAR(40),
+    sports_category VARCHAR(30)
+); 
+
+SELECT FIO, name_section FROM _Section,_Members,_Payment WHERE _Members.id_members = _Payment.id_member_payment and  _Section.id_section = _Payment.id_section_payment
